@@ -34,6 +34,10 @@ const StyledRow = styled(CommonRow)`
   }
 `;
 
+const StyledBody = styled.section`
+  margin: 0.4rem 0;
+`;
+
 const TableContext = createContext();
 
 function Table({ columns, children }) {
@@ -48,5 +52,21 @@ function Header({ children }) {
   const { columns } = useContext(TableContext);
   return <StyledHeader columns={columns}>{children}</StyledHeader>;
 }
+
+function Row({ children }) {
+  const { columns } = useContext(TableContext);
+  return <StyledRow columns={columns}>{children}</StyledRow>;
+}
+
+function Body({ data, render }) {
+  if (!data.length) {
+    return <div>No data</div>;
+  }
+  return <StyledBody>{data.map(render)}</StyledBody>;
+}
+
+Table.Header = Header;
+Table.Row = Row;
+Table.Body = Body;
 
 export default Table;
