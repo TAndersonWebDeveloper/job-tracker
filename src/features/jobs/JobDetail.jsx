@@ -35,6 +35,27 @@ const JobDetail = () => {
     navigate("/dashboard");
   };
 
+  const iconType = {
+    applied: <HiOutlineRocketLaunch />,
+    rejected: <HiNoSymbol />,
+    interview: <HiOutlineCheckCircle />,
+    offer: <HiOutlineCheckCircle />,
+  };
+
+  const jobStatus = {
+    applied: "Applied",
+    rejected: "Rejected",
+    interview: "Interview",
+    offer: "Offer",
+  };
+
+  const jobStatusColor = {
+    applied: "yellow",
+    rejected: "red",
+    interview: "blue",
+    offer: "green",
+  };
+
   return (
     <DetailContainer>
       <DetailHeader>
@@ -75,16 +96,19 @@ const JobDetail = () => {
         </div>
         <div>
           <StyledInfo
-            color={job.status === "applied" ? "blue" : "red"}
-            icon={
-              job.status === "applied" ? (
-                <HiOutlineRocketLaunch />
-              ) : (
-                <HiNoSymbol />
-              )
-            }
+            color={jobStatusColor[job.status]}
+            // icon={
+            //   job.status === "applied" ? (
+            //     <HiOutlineRocketLaunch />
+            //   ) : (
+            //     <HiNoSymbol />
+            //   )
+            // }
+
+            icon={iconType[job.status]}
             title="Current Status"
-            value={`${job.status === "applied" ? "Applied" : "Rejected"}`}
+            // value={`${job.status === "applied" ? "Applied" : "Rejected"}`}
+            value={jobStatus[job.status]}
           />
         </div>
       </DetailBody>

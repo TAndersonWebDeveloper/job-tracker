@@ -3,6 +3,7 @@ import Submenu from "../../ui/SubMenu";
 import Table from "../../ui/Table";
 import { useNavigate, NavLink } from "react-router-dom";
 import { styled } from "styled-components";
+import Tag from "../../ui/Tag";
 
 const StyledNavLink = styled(NavLink)`
   border-bottom: 1px solid var(--color-grey-300);
@@ -10,6 +11,12 @@ const StyledNavLink = styled(NavLink)`
 
 const JobRow = ({ job }) => {
   const navigate = useNavigate();
+
+  const statusToTagName = {
+    unconfirmed: "blue",
+    true: "green",
+    false: "red",
+  };
 
   return (
     <StyledNavLink to={`/jobs/${job.id}`}>
@@ -20,19 +27,15 @@ const JobRow = ({ job }) => {
         <div>{job.company}</div>
         <div>{job.location}</div>
         <div>{job.salary}</div>
-        {job.response ? <div>Yes</div> : <div>No</div>}
-        <Submenu>
-          <Submenu.Toggle id={job.id} />
-          <Submenu.List id={job.id}>
-            <Submenu.Item
-              onClick={() => navigate("/dashboard")}
-              icon={<HiEye />}
-            >
-              See Details
-            </Submenu.Item>
-            <Submenu.Item icon={<HiTrash />}>Delete</Submenu.Item>
-          </Submenu.List>
-        </Submenu>
+        {job.response ? (
+          <Tag type={statusToTagName[job.response]} color="green">
+            Yes
+          </Tag>
+        ) : (
+          <Tag type={statusToTagName[job.response]} color="green">
+            No
+          </Tag>
+        )}
       </Table.Row>
     </StyledNavLink>
   );

@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import { createContext, useContext } from "react";
 import { styled } from "styled-components";
 
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
-
+  border-bottom: none;
   font-size: 1.4rem;
   background-color: var(--color-grey-0);
   border-radius: 7px;
@@ -17,8 +18,7 @@ const CommonRow = styled.div`
 `;
 const StyledHeader = styled(CommonRow)`
   padding: 1.6rem 2.4rem;
-
-  background-color: var(--color-grey-50);
+  background-color: var(--color-grey-100);
   border-bottom: 1px solid var(--color-grey-200);
   text-transform: uppercase;
   letter-spacing: 0.4px;
@@ -28,9 +28,9 @@ const StyledHeader = styled(CommonRow)`
 
 const StyledRow = styled(CommonRow)`
   padding: 1.2rem 2.4rem;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
+  height: 5.4rem;
+  &:not(last-child) {
+    border-bottom: 1px solid var(--color-grey-200);
   }
 
   &:hover {
@@ -39,9 +39,7 @@ const StyledRow = styled(CommonRow)`
   }
 `;
 
-const StyledBody = styled.section`
-  margin: 0.4rem 0;
-`;
+const StyledBody = styled.section``;
 
 const TableContext = createContext();
 

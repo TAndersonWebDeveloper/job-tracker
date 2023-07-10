@@ -27,11 +27,19 @@ export const addJob = async ({
   salary,
   status,
   location,
+  response,
 }) => {
   const { data, error } = await supabase
     .from("jobs")
     .insert([
-      { job_title: jobTitle, company: companyName, salary, status, location },
+      {
+        job_title: jobTitle,
+        company: companyName,
+        salary,
+        status,
+        location,
+        response,
+      },
     ]);
 
   if (error) {

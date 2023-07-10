@@ -42,8 +42,9 @@ const NewJobForm = () => {
     salary,
     status,
     location,
+    response,
   }) => {
-    await addJob({ jobTitle, companyName, salary, status, location });
+    await addJob({ jobTitle, companyName, salary, status, location, response });
     navigate("/jobs");
   };
 
@@ -81,6 +82,12 @@ const NewJobForm = () => {
           <option value="rejected">Rejected</option>
         </Select>
       </FormRow>
+      <FormRow label="Response" id="response">
+        <Select name="response" id="response" {...register("response")}>
+          <option value={false}>No</option>
+          <option value={true}>Yes</option>
+        </Select>
+      </FormRow>
       <FormRow>
         <Button variation="secondary" size="medium" type="reset">
           Cancel
@@ -89,6 +96,7 @@ const NewJobForm = () => {
           Add Job
         </Button>
       </FormRow>
+      <FormRow></FormRow>
     </Form>
   );
 };
