@@ -96,7 +96,6 @@ const NewJobForm = () => {
           Add Job
         </Button>
       </FormRow>
-      <FormRow></FormRow>
     </Form>
   );
 };

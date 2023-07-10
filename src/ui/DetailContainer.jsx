@@ -26,6 +26,7 @@ export const DetailHeader = styled.div`
 
 export const DetailBody = styled.div`
   border: 1px solid var(--color-grey-200);
+  background-color: var(--color-grey-0);
   border-top: none;
   padding: 2.4rem;
   display: flex;

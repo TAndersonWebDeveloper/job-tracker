@@ -5,6 +5,18 @@ export function useJobs() {
   // const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
+  //Filter
+  const filterValue = searchParams.get("status");
+  const filter =
+    !filterValue || filterValue === "all"
+      ? null
+      : {
+          field: "status",
+          value: filterValue,
+          method: "eq",
+        };
+
+  //pagination
   const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
 
   const {
@@ -12,9 +24,8 @@ export function useJobs() {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["jobs", page],
-    queryFn: () => getJobs({ page }),
+    queryKey: ["jobs", page, filter],
+    queryFn: () => getJobs({ page, filter }),
   });
-
   return { jobs, isLoading, error, count };
 }

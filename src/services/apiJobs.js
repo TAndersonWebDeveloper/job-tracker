@@ -1,10 +1,15 @@
 import supabase from "./supabase";
 
-export const getJobs = async ({ page }) => {
+export const getJobs = async ({ page, filter }) => {
   let query = supabase.from("jobs").select("*", {
     count: "exact",
   });
 
+  //Filter
+
+  if (filter) query = query.eq(filter.field, filter.value);
+
+  //Pagination
   if (page) {
     const from = (page - 1) * 10;
     const to = from + 10 - 1;
@@ -29,18 +34,16 @@ export const addJob = async ({
   location,
   response,
 }) => {
-  const { data, error } = await supabase
-    .from("jobs")
-    .insert([
-      {
-        job_title: jobTitle,
-        company: companyName,
-        salary,
-        status,
-        location,
-        response,
-      },
-    ]);
+  const { data, error } = await supabase.from("jobs").insert([
+    {
+      job_title: jobTitle,
+      company: companyName,
+      salary,
+      status,
+      location,
+      response,
+    },
+  ]);
 
   if (error) {
     console.error(error);
