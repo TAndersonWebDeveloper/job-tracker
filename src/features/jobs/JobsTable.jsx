@@ -1,3 +1,4 @@
+import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import JobRow from "./JobRow";
 import { useJobs } from "./useJobs";
@@ -6,7 +7,7 @@ const JobsTable = () => {
   const { jobs, isLoading, error } = useJobs();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   if (error) {

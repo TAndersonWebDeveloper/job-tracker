@@ -12,6 +12,7 @@ import AppLayout from "./ui/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Jobs from "./pages/Jobs";
 import GlobalStyles from "./styles/GlobalStyles";
+import NewJob from "./pages/NewJob";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +31,7 @@ function App() {
           <Route element={<AppLayout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="jobs" element={<Jobs />} />
+            <Route path="jobs/new" element={<NewJob />} />
           </Route>
         </Routes>
       </BrowserRouter>

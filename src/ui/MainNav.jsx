@@ -19,7 +19,6 @@ const StyledNavLink = styled(NavLink)`
     font-weight: 500;
     padding: 1.2rem 2.4rem;
     transition: all 0.3s;
-    
   }
 
   &:hover,
@@ -43,6 +42,7 @@ const StyledNavLink = styled(NavLink)`
   &.active:link svg,
   &.active:visited svg {
     color: var(--color-brand-600);
+  }
 `;
 
 const MainNav = () => {
@@ -51,6 +51,11 @@ const MainNav = () => {
       <li>
         <StyledNavLink to="/dashboard">
           <span>Dashboard</span>
+        </StyledNavLink>
+      </li>
+      <li>
+        <StyledNavLink to="/jobs/new">
+          <span>Track New Job</span>
         </StyledNavLink>
       </li>
       <li>
