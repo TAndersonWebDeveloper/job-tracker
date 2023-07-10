@@ -10,3 +10,24 @@ export const getJobs = async () => {
 
   return data;
 };
+
+export const addJob = async ({
+  jobTitle,
+  companyName,
+  salary,
+  status,
+  location,
+}) => {
+  const { data, error } = await supabase
+    .from("jobs")
+    .insert([
+      { job_title: jobTitle, company: companyName, salary, status, location },
+    ]);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Job could not be added");
+  }
+
+  return data;
+};

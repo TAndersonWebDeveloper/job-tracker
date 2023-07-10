@@ -32,6 +32,11 @@ const StyledRow = styled(CommonRow)`
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
   }
+
+  &:hover {
+    background-color: var(--color-grey-200);
+    cursor: pointer;
+  }
 `;
 
 const StyledBody = styled.section`
