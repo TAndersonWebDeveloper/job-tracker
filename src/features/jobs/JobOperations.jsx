@@ -11,7 +11,7 @@ const TableOperations = styled.div`
 const JobOperations = () => {
   return (
     <TableOperations>
-      <NavLink to="/jobs/new">
+      <NavLink to="/new">
         <Button size="medium" variation="primary">
           Track New Job
         </Button>

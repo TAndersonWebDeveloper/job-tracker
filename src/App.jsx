@@ -14,6 +14,7 @@ import Jobs from "./pages/Jobs";
 import GlobalStyles from "./styles/GlobalStyles";
 import NewJob from "./pages/NewJob";
 import { Toaster } from "react-hot-toast";
+import JobDetails from "./pages/JobDetails";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,8 +32,9 @@ function App() {
         <Routes>
           <Route element={<AppLayout />}>
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="jobs" element={<Jobs />} />
-            <Route path="jobs/new" element={<NewJob />} />
+            <Route path="jobs" element={<Jobs />}></Route>
+            <Route path="new" element={<NewJob />} />
+            <Route path="jobs/:jobId" element={<JobDetails />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -54,7 +54,7 @@ const MainNav = () => {
         </StyledNavLink>
       </li>
       <li>
-        <StyledNavLink to="/jobs/new">
+        <StyledNavLink to="/new">
           <span>Track New Job</span>
         </StyledNavLink>
       </li>
