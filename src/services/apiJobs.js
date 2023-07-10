@@ -1,14 +1,24 @@
 import supabase from "./supabase";
 
-export const getJobs = async () => {
-  const { data, error } = await supabase.from("jobs").select("*");
+export const getJobs = async ({ page }) => {
+  let query = supabase.from("jobs").select("*", {
+    count: "exact",
+  });
+
+  if (page) {
+    const from = (page - 1) * 10;
+    const to = from + 10 - 1;
+    query = query.range(from, to);
+  }
+
+  const { data, error, count } = await query;
 
   if (error) {
     console.error(error);
     throw new Error("Jobs could not be loaded");
   }
 
-  return data;
+  return { data, count };
 };
 
 export const addJob = async ({

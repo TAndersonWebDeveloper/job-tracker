@@ -14,7 +14,7 @@ import {
   HiOutlineRocketLaunch,
 } from "react-icons/hi2";
 import { SlLocationPin } from "react-icons/sl";
-
+import { useMoveBack } from "../../hooks/useMoveBack";
 import { BsCashCoin } from "react-icons/bs";
 import StyledInfo from "../../ui/StyledInfo";
 import Button from "../../ui/Button";
@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { useDeleteJob } from "./useDeleteJob";
 
 const JobDetail = () => {
+  const moveBack = useMoveBack();
   const navigate = useNavigate();
   const { job, isLoading } = useJob();
   const { deleteJob, isDeleting } = useDeleteJob();
@@ -102,7 +103,7 @@ const JobDetail = () => {
         >
           Delete Job
         </Button>
-        <Button variation="secondary" size="medium">
+        <Button variation="secondary" size="medium" onClick={moveBack}>
           Back
         </Button>
       </ButtonGroup>

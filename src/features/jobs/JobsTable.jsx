@@ -1,10 +1,11 @@
+import Pagination from "../../ui/Pagination";
 import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import JobRow from "./JobRow";
 import { useJobs } from "./useJobs";
 
 const JobsTable = () => {
-  const { jobs, isLoading, error } = useJobs();
+  const { jobs, isLoading, error, count } = useJobs();
 
   if (isLoading) {
     return <Spinner />;
@@ -28,6 +29,7 @@ const JobsTable = () => {
         data={jobs}
         render={(job) => <JobRow key={job.id} job={job} />}
       />
+      <Pagination count={count} />
     </Table>
   );
 };
