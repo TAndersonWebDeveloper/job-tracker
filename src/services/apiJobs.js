@@ -31,3 +31,30 @@ export const addJob = async ({
 
   return data;
 };
+
+export const getJob = async (id) => {
+  const { data, error } = await supabase
+    .from("jobs")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Job could not be loaded");
+  }
+
+  return data;
+};
+
+export async function deleteJob(id) {
+  const { data, error } = await supabase.from("jobs").delete().eq("id", id);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Job could not be deleted");
+  }
+
+  console.log(data);
+  return data;
+}
