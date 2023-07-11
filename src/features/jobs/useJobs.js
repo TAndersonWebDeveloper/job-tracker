@@ -27,5 +27,18 @@ export function useJobs() {
     queryKey: ["jobs", page, filter],
     queryFn: () => getJobs({ page, filter }),
   });
-  return { jobs, isLoading, error, count };
+
+  const rejectedJobs = jobs?.filter((job) => job.status === "rejected");
+  const interviewJobs = jobs?.filter((job) => job.status === "interviewing");
+  const activeApplications = jobs?.filter((job) => job.status != "rejected");
+
+  return {
+    jobs,
+    isLoading,
+    error,
+    count,
+    rejectedJobs,
+    interviewJobs,
+    activeApplications,
+  };
 }

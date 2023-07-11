@@ -1,23 +1,25 @@
 import { useJobs } from "../features/jobs/useJobs";
 import { useState } from "react";
+import Heading from "../ui/Heading";
+import Row from "../ui/Row";
+import DashboardLayout from "../features/dashboard/DashboardLayout";
+import Spinner from "../ui/Spinner";
 const Dashboard = () => {
   const { jobs, isLoading, error } = useJobs();
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading) return <Spinner />;
 
   if (error) {
     return <div>{error.message}</div>;
   }
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      {jobs.map((jobs) => {
-        return <div key={jobs.id}>{jobs.job_title}</div>;
-      })}
-    </div>
+    <>
+      <Row type="horizontal">
+        <Heading as="h1">Dashboard</Heading>
+      </Row>
+      <DashboardLayout />
+    </>
   );
 };
 
