@@ -132,7 +132,7 @@ const JobDetail = () => {
           size="medium"
           onClick={() => {
             handleDelete(job.id);
-            navigate("/dashboard");
+            navigate("/jobs");
           }}
         >
           Delete Job

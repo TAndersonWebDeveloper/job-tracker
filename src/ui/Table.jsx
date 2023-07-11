@@ -39,6 +39,14 @@ const StyledRow = styled(CommonRow)`
   }
 `;
 
+const NoData = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5.4rem;
+  border: 1px solid var(--color-grey-200);
+`;
+
 const StyledBody = styled.section``;
 
 const TableContext = createContext();
@@ -63,7 +71,7 @@ function Row({ children }) {
 
 function Body({ data, render }) {
   if (!data.length) {
-    return <div>No data</div>;
+    return <NoData>No Jobs match that critera</NoData>;
   }
   return <StyledBody>{data.map(render)}</StyledBody>;
 }

@@ -89,8 +89,16 @@ const NewJobForm = () => {
         </Select>
       </FormRow>
       <FormRow>
-        <Button variation="secondary" size="medium" type="reset">
+        <Button
+          variation="danger"
+          size="medium"
+          type="reset"
+          onClick={() => navigate(-1)}
+        >
           Cancel
+        </Button>
+        <Button variation="secondary" size="medium" type="reset">
+          Clear Form
         </Button>
         <Button variation="primary" size="medium" type="submit">
           Add Job

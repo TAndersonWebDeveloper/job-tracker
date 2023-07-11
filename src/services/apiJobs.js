@@ -76,12 +76,10 @@ export async function deleteJob(id) {
     throw new Error("Job could not be deleted");
   }
 
-  console.log(data);
   return data;
 }
 
 export const updateJob = async (newJob, id) => {
-  console.log(newJob, id);
   const { data, error } = await supabase
     .from("jobs")
     .update({ ...newJob })
@@ -89,7 +87,6 @@ export const updateJob = async (newJob, id) => {
     .select();
 
   if (error) {
-    console.error(error);
     throw new Error("Job could not be updated");
   }
 
