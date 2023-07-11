@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import { useJob } from "./useJob";
 import Spinner from "../../ui/Spinner";
 import DetailContainer, {
@@ -12,6 +11,7 @@ import {
   HiNoSymbol,
   HiOutlineCheckCircle,
   HiOutlineRocketLaunch,
+  HiOutlinePhone,
 } from "react-icons/hi2";
 import { SlLocationPin } from "react-icons/sl";
 import { useMoveBack } from "../../hooks/useMoveBack";
@@ -21,8 +21,11 @@ import Button from "../../ui/Button";
 import { useNavigate } from "react-router-dom";
 
 import { useDeleteJob } from "./useDeleteJob";
+import UpdateJobDetails from "./UpdateJobDetails";
+import { useState } from "react";
 
 const JobDetail = () => {
+  const [isEditing, setIsEditing] = useState(false);
   const moveBack = useMoveBack();
   const navigate = useNavigate();
   const { job, isLoading } = useJob();
@@ -38,21 +41,21 @@ const JobDetail = () => {
   const iconType = {
     applied: <HiOutlineRocketLaunch />,
     rejected: <HiNoSymbol />,
-    interview: <HiOutlineCheckCircle />,
+    interviewing: <HiOutlinePhone />,
     offer: <HiOutlineCheckCircle />,
   };
 
   const jobStatus = {
     applied: "Applied",
     rejected: "Rejected",
-    interview: "Interview",
+    interviewing: "Interview",
     offer: "Offer",
   };
 
   const jobStatusColor = {
     applied: "yellow",
     rejected: "red",
-    interview: "blue",
+    interviewing: "blue",
     offer: "green",
   };
 
@@ -114,9 +117,16 @@ const JobDetail = () => {
       </DetailBody>
 
       <ButtonGroup>
-        <Button variation="primary" size="large">
-          Update
-        </Button>
+        {!isEditing && (
+          <Button
+            variation="primary"
+            size="large"
+            onClick={() => setIsEditing(!isEditing)}
+          >
+            Update
+          </Button>
+        )}
+
         <Button
           variation="danger"
           size="medium"
@@ -131,6 +141,9 @@ const JobDetail = () => {
           Back
         </Button>
       </ButtonGroup>
+      {isEditing && (
+        <UpdateJobDetails jobToEdit={job} setIsEditing={setIsEditing} />
+      )}
     </DetailContainer>
   );
 };

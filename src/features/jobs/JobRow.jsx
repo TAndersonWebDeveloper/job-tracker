@@ -26,7 +26,7 @@ const JobRow = ({ job }) => {
         </div>
         <div>{job.company}</div>
         <div>{job.location}</div>
-        <div>{job.salary}</div>
+        <div>{job.salary === 0 ? "Not Specified" : `$${job.salary}`}</div>
         {job.response ? (
           <Tag type={statusToTagName[job.response]} color="green">
             Yes

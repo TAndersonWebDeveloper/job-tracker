@@ -17,7 +17,7 @@ const JobOperations = () => {
         options={[
           { label: "All", value: "all" },
           { label: "Applied", value: "applied" },
-          { label: "Interview", value: "interview" },
+          { label: "Interview", value: "interviewing" },
           { label: "Offer", value: "offer" },
           { label: "Rejected", value: "rejected" },
         ]}

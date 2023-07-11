@@ -79,3 +79,19 @@ export async function deleteJob(id) {
   console.log(data);
   return data;
 }
+
+export const updateJob = async (newJob, id) => {
+  console.log(newJob, id);
+  const { data, error } = await supabase
+    .from("jobs")
+    .update({ ...newJob })
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Job could not be updated");
+  }
+
+  return data;
+};
