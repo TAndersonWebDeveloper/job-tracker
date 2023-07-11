@@ -115,7 +115,7 @@ const JobDetail = () => {
 
       <ButtonGroup>
         <Button variation="primary" size="large">
-          Edit
+          Update
         </Button>
         <Button
           variation="danger"
