@@ -75,8 +75,10 @@ export const ButtonGroup = styled.div`
 export const SkillsContainer = styled.div`
   display: flex;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  align-items: center;
   gap: 1.2rem;
-  max-width: 50%;
+  max-width: 100%;
+  flex-wrap: wrap;
   flex: 1;
 `;
 

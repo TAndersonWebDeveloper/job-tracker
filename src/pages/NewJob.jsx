@@ -1,4 +1,3 @@
-import React from "react";
 import Heading from "../ui/Heading";
 import NewJobForm from "../features/jobs/NewJobForm";
 

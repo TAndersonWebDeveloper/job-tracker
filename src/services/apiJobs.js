@@ -94,3 +94,18 @@ export const updateJob = async (newJob, id) => {
 
   return data;
 };
+
+export const deleteSkills = async (index, id) => {
+  const job = await supabase.from("jobs").select("skills").eq("id", id);
+
+  const skills = job.data[0].skills;
+
+  skills.splice(index, 1);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Skill could not be deleted");
+  }
+
+  return data;
+};
