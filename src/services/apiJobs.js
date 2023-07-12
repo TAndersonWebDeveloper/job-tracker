@@ -33,6 +33,7 @@ export const addJob = async ({
   status,
   location,
   response,
+  link,
 }) => {
   const { data, error } = await supabase.from("jobs").insert([
     {
@@ -42,6 +43,7 @@ export const addJob = async ({
       status,
       location,
       response,
+      link,
     },
   ]);
 

@@ -43,8 +43,17 @@ const NewJobForm = () => {
     status,
     location,
     response,
+    link,
   }) => {
-    await addJob({ jobTitle, companyName, salary, status, location, response });
+    await addJob({
+      jobTitle,
+      companyName,
+      salary,
+      status,
+      location,
+      response,
+      link,
+    });
     navigate("/jobs");
   };
 
@@ -73,6 +82,9 @@ const NewJobForm = () => {
       </FormRow>
       <FormRow label="Location">
         <Input type="text" id="location" {...register("location")} />
+      </FormRow>
+      <FormRow label="Link">
+        <Input type="text" id="link" {...register("link")} />
       </FormRow>
       <FormRow label="Status" id="status">
         <Select name="status" id="status" {...register("status")}>

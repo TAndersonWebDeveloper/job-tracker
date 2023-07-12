@@ -12,17 +12,19 @@ import {
   HiOutlineCheckCircle,
   HiOutlineRocketLaunch,
   HiOutlinePhone,
+  HiChevronDown,
 } from "react-icons/hi2";
 import { SlLocationPin } from "react-icons/sl";
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { BsCashCoin } from "react-icons/bs";
 import StyledInfo from "../../ui/StyledInfo";
 import Button from "../../ui/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { useDeleteJob } from "./useDeleteJob";
 import UpdateJobDetails from "./UpdateJobDetails";
 import { useState } from "react";
+import JobDetailInfo from "./JobDetailInfo";
 
 const JobDetail = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -100,21 +102,15 @@ const JobDetail = () => {
         <div>
           <StyledInfo
             color={jobStatusColor[job.status]}
-            // icon={
-            //   job.status === "applied" ? (
-            //     <HiOutlineRocketLaunch />
-            //   ) : (
-            //     <HiNoSymbol />
-            //   )
-            // }
-
             icon={iconType[job.status]}
             title="Current Status"
-            // value={`${job.status === "applied" ? "Applied" : "Rejected"}`}
             value={jobStatus[job.status]}
           />
         </div>
       </DetailBody>
+      <div>
+        <JobDetailInfo job={job} />
+      </div>
 
       <ButtonGroup>
         {!isEditing && (
@@ -126,6 +122,11 @@ const JobDetail = () => {
             Update
           </Button>
         )}
+        {/* <Link target="_blank" to={job.link}>
+          <Button size="medium" variation="primary">
+            Job Posting
+          </Button>
+        </Link> */}
 
         <Button
           variation="danger"
@@ -137,6 +138,7 @@ const JobDetail = () => {
         >
           Delete Job
         </Button>
+
         <Button variation="secondary" size="medium" onClick={moveBack}>
           Back
         </Button>

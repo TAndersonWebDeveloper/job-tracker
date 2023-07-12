@@ -34,6 +34,7 @@ const UpdateJobDetails = ({ jobToEdit, setIsEditing }) => {
       location: editValues.location,
       status: editValues.status,
       response: editValues.response,
+      link: editValues.link,
     },
   });
 
@@ -46,6 +47,7 @@ const UpdateJobDetails = ({ jobToEdit, setIsEditing }) => {
         location: data.location,
         status: data.status,
         response: data.response,
+        link: data.link,
       },
       id: editId,
     });
@@ -77,6 +79,9 @@ const UpdateJobDetails = ({ jobToEdit, setIsEditing }) => {
       </FormRow>
       <FormRow label="Location">
         <Input type="text" id="location" {...register("location")} />
+      </FormRow>
+      <FormRow label="Job Posting Url">
+        <Input type="text" id="location" {...register("link")} />
       </FormRow>
       <FormRow label="Status" id="status">
         <Select name="status" id="status" {...register("status")}>

@@ -28,6 +28,7 @@ export const DetailBody = styled.div`
   border: 1px solid var(--color-grey-200);
   background-color: var(--color-grey-0);
   border-top: none;
+  border-bottom: none;
   padding: 2.4rem;
   display: flex;
   justify-content: space-between;
