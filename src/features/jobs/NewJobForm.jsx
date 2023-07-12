@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { get, useForm } from "react-hook-form";
 import styled from "styled-components";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "../../ui/Button";
 import { toast } from "react-hot-toast";
+import { useEffect, useState } from "react";
 
 const Select = styled.select`
   font-size: 1.4rem;
@@ -24,6 +25,8 @@ const Select = styled.select`
 `;
 
 const NewJobForm = () => {
+  const [enteredSkills, setEnteredSkills] = useState([]);
+  const [skill, setSkill] = useState("");
   const navigate = useNavigate();
 
   const { register, formState, getValues, handleSubmit, reset } = useForm({
@@ -33,6 +36,22 @@ const NewJobForm = () => {
       salary: "",
     },
   });
+
+  useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+
+        if (getValues("skills") !== "") {
+          setEnteredSkills([...enteredSkills, getValues("skills")]);
+        }
+      }
+    });
+    console.log(enteredSkills);
+    return () => {
+      window.removeEventListener("keydown", (e) => {});
+    };
+  }, [enteredSkills]);
 
   const { errors } = formState;
 
@@ -85,6 +104,14 @@ const NewJobForm = () => {
       </FormRow>
       <FormRow label="Link">
         <Input type="text" id="link" {...register("link")} />
+      </FormRow>
+      <FormRow label="Skills">
+        <Input type="text" id="skills" {...register("skills")} />
+      </FormRow>
+      <FormRow>
+        {enteredSkills?.map((skill) => {
+          return <p key={Math.random()}>{skill}</p>;
+        })}
       </FormRow>
       <FormRow label="Status" id="status">
         <Select name="status" id="status" {...register("status")}>
