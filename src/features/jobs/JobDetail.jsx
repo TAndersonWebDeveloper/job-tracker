@@ -4,6 +4,8 @@ import DetailContainer, {
   DetailBody,
   DetailHeader,
   ButtonGroup,
+  StyledLink,
+  Tooltip,
 } from "../../ui/DetailContainer";
 import {
   HiOutlineClipboardDocumentList,
@@ -16,7 +18,7 @@ import {
 } from "react-icons/hi2";
 import { SlLocationPin } from "react-icons/sl";
 import { useMoveBack } from "../../hooks/useMoveBack";
-import { BsCashCoin } from "react-icons/bs";
+import { BsCashCoin, BsLink45Deg } from "react-icons/bs";
 import StyledInfo from "../../ui/StyledInfo";
 import Button from "../../ui/Button";
 import { useNavigate, Link } from "react-router-dom";
@@ -28,6 +30,7 @@ import JobDetailInfo from "./JobDetailInfo";
 
 const JobDetail = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const [hover, setHover] = useState(false);
   const moveBack = useMoveBack();
   const navigate = useNavigate();
   const { job, isLoading } = useJob();
@@ -67,6 +70,11 @@ const JobDetail = () => {
         <div>
           <HiOutlineClipboardDocumentList />
           <h2>{job.job_title}</h2>
+          <div>
+            <StyledLink to={job.link} target="_blank">
+              <BsLink45Deg />
+            </StyledLink>
+          </div>
         </div>
 
         <div>
