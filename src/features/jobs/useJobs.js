@@ -5,6 +5,16 @@ export function useJobs() {
   // const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
+  //Search
+  const searchValue = searchParams.get("search");
+  const search = !searchValue
+    ? null
+    : {
+        fields: ["job_title", "company", "location"],
+        value: searchValue,
+        method: "textSearch",
+      };
+
   //Filter
   const filterValue = searchParams.get("status");
   const filter =
@@ -24,8 +34,8 @@ export function useJobs() {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["jobs", page, filter],
-    queryFn: () => getJobs({ page, filter }),
+    queryKey: ["jobs", page, filter, search],
+    queryFn: () => getJobs({ page, filter, search }),
   });
 
   const rejectedJobs = jobs?.filter((job) => job.status === "rejected");

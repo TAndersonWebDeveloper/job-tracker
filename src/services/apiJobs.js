@@ -1,6 +1,6 @@
 import supabase from "./supabase";
 
-export const getJobs = async ({ page, filter }) => {
+export const getJobs = async ({ page, filter, search }) => {
   let query = supabase.from("jobs").select("*", {
     count: "exact",
   });
@@ -14,6 +14,13 @@ export const getJobs = async ({ page, filter }) => {
     const from = (page - 1) * 10;
     const to = from + 10 - 1;
     query = query.range(from, to);
+  }
+
+  //Search
+
+  if (search) {
+    const { fields, value } = search;
+    query = query.or(fields.map((field) => `${field}.ilike.%${value}%`));
   }
 
   const { data, error, count } = await query;

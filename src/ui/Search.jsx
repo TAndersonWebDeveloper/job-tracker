@@ -2,9 +2,10 @@ import { styled } from "styled-components";
 import { useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import Button from "./Button";
+import { useJobs } from "../features/jobs/useJobs";
+import { useSearchParams } from "react-router-dom";
 
 const StyledSearch = styled.input`
-  //   outline: none;
   background: transparent;
   border: none;
 `;
@@ -38,13 +39,20 @@ const StyledButton = styled.div`
 
 const Search = () => {
   const [search, setSearch] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { jobs, isLoading, isError } = useJobs();
+
+  function handleClick() {
+    searchParams.set("search", search);
+    setSearchParams(searchParams);
+  }
 
   return (
     <>
       <StyledSearchContainer>
-        <StyledSearch />
+        <StyledSearch onChange={(e) => setSearch(e.target.value)} />
         <StyledButton>
-          <Button variation="primary" size="small">
+          <Button variation="primary" size="small" onClick={handleClick}>
             <HiOutlineSearch />
           </Button>
         </StyledButton>
