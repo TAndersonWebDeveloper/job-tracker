@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import Button from "../../ui/Button";
 import { NavLink } from "react-router-dom";
 import Filter from "../../ui/Filter";
+import Search from "../../ui/Search";
 
 const TableOperations = styled.div`
   display: flex;
@@ -12,6 +13,7 @@ const TableOperations = styled.div`
 const JobOperations = () => {
   return (
     <TableOperations>
+      <Search />
       <Filter
         filterField="status"
         options={[
