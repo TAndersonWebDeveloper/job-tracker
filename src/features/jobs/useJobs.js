@@ -10,7 +10,7 @@ export function useJobs() {
   const search = !searchValue
     ? null
     : {
-        fields: ["job_title", "company", "location"],
+        fields: ["job_title", "company", "location", "status"],
         value: searchValue,
         method: "textSearch",
       };

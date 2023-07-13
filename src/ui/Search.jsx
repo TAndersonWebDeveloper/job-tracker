@@ -8,17 +8,30 @@ import { useSearchParams } from "react-router-dom";
 const StyledSearch = styled.input`
   background: transparent;
   border: none;
+  outline: none !important;
+  padding: 0.4rem;
+
+  &::placeholder {
+    color: var(--color-grey-200);
+  }
+
+  &:focus {
+    &::placeholder {
+      color: transparent;
+    }
+  }
 `;
 
 const StyledSearchContainer = styled.div`
-  border: 1px solid var(--color-grey-100);
+  border: 1px solid var(--color-grey-200);
+  outline: none !important;
   box-shadow: var(--shadow-sm);
   border-radius: var(--border-radius-sm);
   display: flex;
   background-color: var(--color-grey-0);
   align-items: center;
   height: 100%;
-  padding: 0.6rem;
+
   position: relative;
 `;
 
@@ -42,22 +55,26 @@ const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { jobs, isLoading, isError } = useJobs();
 
-  function handleClick() {
+  function handleClick(e) {
+    e.preventDefault();
     searchParams.set("search", search);
     setSearchParams(searchParams);
   }
 
   return (
-    <>
-      <StyledSearchContainer>
-        <StyledSearch onChange={(e) => setSearch(e.target.value)} />
+    <form action="">
+      <StyledSearchContainer onSubmit={handleClick}>
+        <StyledSearch
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search"
+        />
         <StyledButton>
           <Button variation="primary" size="small" onClick={handleClick}>
             <HiOutlineSearch />
           </Button>
         </StyledButton>
       </StyledSearchContainer>
-    </>
+    </form>
   );
 };
 
