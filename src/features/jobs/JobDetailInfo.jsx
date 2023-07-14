@@ -34,6 +34,8 @@ const StyledInput = styled.input`
   height: 4rem;
   padding-left: 1.6rem;
   width: auto;
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-grey-0);
 `;
 
 const JobDetailInfo = ({ job }) => {
