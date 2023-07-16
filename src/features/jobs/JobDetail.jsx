@@ -35,6 +35,14 @@ const JobDetail = () => {
   const navigate = useNavigate();
   const { job, isLoading } = useJob();
   const { deleteJob, isDeleting } = useDeleteJob();
+  let formattedSalary;
+
+  if (job) {
+    formattedSalary = job.salary.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+  }
 
   if (isLoading || isDeleting) return <Spinner />;
 
@@ -88,7 +96,7 @@ const JobDetail = () => {
             color="green"
             icon={<BsCashCoin />}
             title="Salary"
-            value={job.salary === 0 ? "Not Specified" : `$${job.salary}`}
+            value={job.salary === 0 ? "Not Specified" : `${formattedSalary}`}
           />
         </div>
         <div>

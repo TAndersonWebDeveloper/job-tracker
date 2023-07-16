@@ -18,6 +18,11 @@ const JobRow = ({ job }) => {
     false: "red",
   };
 
+  const formattedSalary = job.salary.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
   return (
     <StyledNavLink to={`/jobs/${job.id}`}>
       <Table.Row>
@@ -26,7 +31,7 @@ const JobRow = ({ job }) => {
         </div>
         <div>{job.company}</div>
         <div>{job.location}</div>
-        <div>{job.salary === 0 ? "Not Specified" : `$${job.salary}`}</div>
+        <div>{job.salary === 0 ? "Not Specified" : `${formattedSalary}`}</div>
         {job.response ? (
           <Tag type={statusToTagName[job.response]} color="green">
             Yes

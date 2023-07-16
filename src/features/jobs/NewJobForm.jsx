@@ -43,6 +43,9 @@ const NewJobForm = () => {
     response,
     link,
   }) => {
+    if (salary === "") {
+      salary = 0;
+    }
     await addJob({
       jobTitle,
       companyName,

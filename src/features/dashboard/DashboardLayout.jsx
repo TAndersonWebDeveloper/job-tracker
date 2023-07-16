@@ -8,6 +8,7 @@ import {
   HiOutlineRocketLaunch,
 } from "react-icons/hi2";
 import { useJobs } from "../jobs/useJobs";
+import ApplicationChart from "../../ui/ApplicationChart";
 const StyledDashboardLayout = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -53,6 +54,7 @@ const DashboardLayout = () => {
           value={rejectedJobs.length}
         />
       </StyledInfoLayout>
+      <ApplicationChart data={jobs} />
     </StyledDashboardLayout>
   );
 };

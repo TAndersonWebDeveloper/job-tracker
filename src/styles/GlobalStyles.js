@@ -190,6 +190,11 @@ img {
   filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
 }
 
+ /* tspan[dy="0.355em"] {
+
+  display: none;
+} */
+
 `;
 
 export default GlobalStyles;
