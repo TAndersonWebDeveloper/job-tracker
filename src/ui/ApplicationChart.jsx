@@ -17,15 +17,22 @@ const ApplicationChart = ({ data }) => {
   let dates = [];
 
   for (let i = 0; i < data.length; i++) {
+    let targetDate = new Date();
     let currentDate = new Date(data[i].created_at);
-    let currentMonth = currentDate.getMonth() + 1;
-    let currentDay = currentDate.getDate();
-    let currentYear = currentDate.getFullYear();
 
-    let label = `${currentMonth}/${currentDay}/${currentYear}`;
-    console.log(label);
+    let timeDif = targetDate.getTime() - currentDate.getTime();
 
-    dates.push(label);
+    let daysDiff = Math.floor(timeDif / (1000 * 3600 * 24));
+
+    if (daysDiff <= 7) {
+      let currentMonth = currentDate.getMonth() + 1;
+      let currentDay = currentDate.getDate();
+      let currentYear = currentDate.getFullYear();
+
+      let label = `${currentMonth}/${currentDay}/${currentYear}`;
+
+      dates.push(label);
+    }
   }
 
   const chartData = dates.reduce((acc, date) => {
