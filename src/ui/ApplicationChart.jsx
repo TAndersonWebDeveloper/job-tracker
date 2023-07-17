@@ -16,18 +16,22 @@ const ApplicationChart = ({ data }) => {
 
   let dates = [];
 
+  let pastSevenDays = [];
+  let today = new Date();
+
+  for (var i = 0; i < 7; i++) {
+    let pastDate = new Date();
+    pastDate.setDate(today.getDate() - i);
+    pastSevenDays.push(pastDate.toDateString());
+  }
+
   for (let i = 0; i < data.length; i++) {
-    let targetDate = new Date();
-    let currentDate = new Date(data[i].created_at);
+    let currentDate = new Date(data[i].created_at).toDateString();
 
-    let timeDif = targetDate.getTime() - currentDate.getTime();
-
-    let daysDiff = Math.floor(timeDif / (1000 * 3600 * 24));
-
-    if (daysDiff <= 7) {
-      let currentMonth = currentDate.getMonth() + 1;
-      let currentDay = currentDate.getDate();
-      let currentYear = currentDate.getFullYear();
+    if (pastSevenDays.includes(currentDate)) {
+      let currentMonth = currentDate.split(" ")[1];
+      let currentDay = currentDate.split(" ")[2];
+      let currentYear = currentDate.split(" ")[3];
 
       let label = `${currentMonth}/${currentDay}/${currentYear}`;
 
@@ -57,7 +61,12 @@ const ApplicationChart = ({ data }) => {
 
   const ChartContainer = styled.div`
     grid-column: 1 / -1;
-    margin-top: 2.4rem;
+    margin-top: 8rem;
+
+    & h2 {
+      margin-bottom: 2.4rem;
+      margin-left: 5rem;
+    }
   `;
 
   const colors = isDarkMode
