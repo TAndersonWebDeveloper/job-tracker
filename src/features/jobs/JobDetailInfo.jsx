@@ -1,13 +1,12 @@
+/* eslint-disable react/prop-types */
 import ExtraInfoContainer from "../../ui/ExtraInfoContainer";
 import { SkillsContainer } from "../../ui/DetailContainer";
 import SkillItem from "../../ui/SkillItem";
 import DetailSubHeading from "../../ui/DetailSubHeading";
-import Button from "../../ui/Button";
 import { styled } from "styled-components";
 import { BsPlusCircle } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
 import { useEditJob } from "./useEditJob";
-import { set } from "react-hook-form";
 
 const Header = styled.div`
   display: flex;
@@ -44,12 +43,14 @@ const JobDetailInfo = ({ job }) => {
   const [skill, setSkill] = useState("");
   const { editJob, isLoading, error } = useEditJob();
 
+  //Focuses on add skill input when addSkill is true
   useEffect(() => {
     if (addSkill) {
       inputRef.current.focus();
     }
   }, [addSkill, skill, setSkill, inputRef, job, editJob, isLoading, error]);
 
+  //Checks if skill input is empty or if job.skills is null
   const handleSubmit = (e) => {
     e.preventDefault();
     if (skill === "") {
@@ -77,10 +78,12 @@ const JobDetailInfo = ({ job }) => {
     inputRef.current.focus();
   };
 
+  //Sets skill state to input value
   const handleSkillChange = (e) => {
     setSkill(e.target.value);
   };
 
+  //Toggles addSkill state
   const handleAddSkill = () => {
     setAddSkill((prevAddSkill) => !prevAddSkill);
   };

@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getJobs } from "../../services/apiJobs";
 import { useSearchParams } from "react-router-dom";
 export function useJobs() {

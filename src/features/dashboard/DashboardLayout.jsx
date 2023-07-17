@@ -19,23 +19,19 @@ const StyledDashboardLayout = styled.div`
 `;
 
 const DashboardLayout = () => {
-  const {
-    jobs,
-    isLoading,
-    error,
-    rejectedJobs,
-    interviewJobs,
-    activeApplications,
-  } = useJobs();
+  const { jobs, rejectedJobs, interviewJobs, activeApplications } = useJobs();
 
+  //Retreive search params
   const [searchParams] = useSearchParams();
   const filter = searchParams.get("last");
 
+  //Get all dates between start and end date using params, default to 7
   const allDates = eachDayOfInterval({
     start: subDays(new Date(), filter || 7),
     end: new Date(),
   });
 
+  //Map all dates to an object with the date and the number of applications on that date, as well as the number of interviews, active applications, and rejected applications
   let dates = allDates.map((date) => {
     return {
       label: format(date, "MM/dd/yyyy"),

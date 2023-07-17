@@ -5,7 +5,6 @@ import DetailContainer, {
   DetailHeader,
   ButtonGroup,
   StyledLink,
-  Tooltip,
 } from "../../ui/DetailContainer";
 import {
   HiOutlineClipboardDocumentList,
@@ -14,14 +13,13 @@ import {
   HiOutlineCheckCircle,
   HiOutlineRocketLaunch,
   HiOutlinePhone,
-  HiChevronDown,
 } from "react-icons/hi2";
 import { SlLocationPin } from "react-icons/sl";
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { BsCashCoin, BsLink45Deg } from "react-icons/bs";
 import StyledInfo from "../../ui/StyledInfo";
 import Button from "../../ui/Button";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useDeleteJob } from "./useDeleteJob";
 import UpdateJobDetails from "./UpdateJobDetails";
@@ -30,13 +28,17 @@ import JobDetailInfo from "./JobDetailInfo";
 
 const JobDetail = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [hover, setHover] = useState(false);
+
+  //React router hooks
   const moveBack = useMoveBack();
   const navigate = useNavigate();
+
+  //Custom hooks
   const { job, isLoading } = useJob();
   const { deleteJob, isDeleting } = useDeleteJob();
-  let formattedSalary;
 
+  //Formatted salary for display
+  let formattedSalary;
   if (job) {
     formattedSalary = job.salary.toLocaleString("en-US", {
       style: "currency",
@@ -138,12 +140,6 @@ const JobDetail = () => {
             Update
           </Button>
         )}
-        {/* <Link target="_blank" to={job.link}>
-          <Button size="medium" variation="primary">
-            Job Posting
-          </Button>
-        </Link> */}
-
         <Button
           variation="danger"
           size="medium"
@@ -154,7 +150,6 @@ const JobDetail = () => {
         >
           Delete Job
         </Button>
-
         <Button variation="secondary" size="medium" onClick={moveBack}>
           Back
         </Button>

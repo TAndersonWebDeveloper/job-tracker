@@ -24,9 +24,10 @@ const Select = styled.select`
 const UpdateJobDetails = ({ jobToEdit, setIsEditing }) => {
   const { id: editId, ...editValues } = jobToEdit;
 
-  const { editJob, isLoading, error } = useEditJob();
+  const { editJob } = useEditJob();
 
-  const { register, formState, getValues, handleSubmit, reset } = useForm({
+  //React hook form for editing a job
+  const { register, handleSubmit } = useForm({
     defaultValues: {
       jobTitle: editValues.job_title,
       companyName: editValues.company,
@@ -38,6 +39,7 @@ const UpdateJobDetails = ({ jobToEdit, setIsEditing }) => {
     },
   });
 
+  //On submit handler for editing a job
   function onSubmit(data) {
     editJob({
       newJob: {

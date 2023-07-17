@@ -1,7 +1,5 @@
-import { HiEye, HiTrash } from "react-icons/hi2";
-import Submenu from "../../ui/SubMenu";
 import Table from "../../ui/Table";
-import { useNavigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 import Tag from "../../ui/Tag";
 
@@ -10,14 +8,13 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 const JobRow = ({ job }) => {
-  const navigate = useNavigate();
-
   const statusToTagName = {
     unconfirmed: "blue",
     true: "green",
     false: "red",
   };
 
+  //Formats salary for display
   const formattedSalary = job.salary.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
