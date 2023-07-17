@@ -10,53 +10,27 @@ import {
 import { useDarkMode } from "../context/DarkModeContext";
 import { styled } from "styled-components";
 import Heading from "./Heading";
+import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
+import { useSearchParams } from "react-router-dom";
 
 const ApplicationChart = ({ data }) => {
   const { isDarkMode } = useDarkMode();
+  const [searchParams] = useSearchParams();
 
-  let dates = [];
+  const filter = searchParams.get("last");
 
-  let pastSevenDays = [];
-  let today = new Date();
+  const allDates = eachDayOfInterval({
+    start: subDays(new Date(), filter || 7),
+    end: new Date(),
+  });
 
-  for (var i = 0; i < 7; i++) {
-    let pastDate = new Date();
-    pastDate.setDate(today.getDate() - i);
-    pastSevenDays.push(pastDate.toDateString());
-  }
-
-  for (let i = 0; i < data.length; i++) {
-    let currentDate = new Date(data[i].created_at).toDateString();
-
-    if (pastSevenDays.includes(currentDate)) {
-      let currentMonth = currentDate.split(" ")[1];
-      let currentDay = currentDate.split(" ")[2];
-      let currentYear = currentDate.split(" ")[3];
-
-      let label = `${currentMonth}/${currentDay}/${currentYear}`;
-
-      dates.push(label);
-    }
-  }
-
-  const chartData = dates.reduce((acc, date) => {
-    if (acc[date]) {
-      acc[date] = acc[date] + 1;
-    } else {
-      acc[date] = 1;
-    }
-    return acc;
-  }, {});
-
-  const unorderedData = Object.entries(chartData).map(([label, value]) => ({
-    label,
-    value,
-  }));
-
-  const finalData = unorderedData.sort((a, b) => {
-    const dateA = new Date(a.label);
-    const dateB = new Date(b.label);
-    return dateA - dateB;
+  let dates = allDates.map((date) => {
+    return {
+      label: format(date, "MM/dd/yyyy"),
+      applications: data.filter((job) =>
+        isSameDay(date, new Date(job.created_at))
+      ).length,
+    };
   });
 
   const ChartContainer = styled.div`
@@ -86,11 +60,11 @@ const ApplicationChart = ({ data }) => {
   return (
     <ChartContainer>
       <Heading as="h2">
-        Applications from {finalData[0].label} to{" "}
-        {finalData[finalData.length - 1].label}
+        Applications from {format(allDates.at(0), "MMM dd yyyy")} &mdash;
+        {format(allDates.at(-1), "MMM dd yyyy")}
       </Heading>
       <ResponsiveContainer height={300} width="100%">
-        <AreaChart data={finalData}>
+        <AreaChart data={dates}>
           <XAxis
             dataKey="label"
             stroke={colors.text}
@@ -100,12 +74,11 @@ const ApplicationChart = ({ data }) => {
           <YAxis
             tick={{ fill: colors.text }}
             tickLine={{ stroke: colors.text }}
-            tickCount={finalData.length}
           />
           <CartesianGrid strokeDasharray="4" />
           <Tooltip contentStyle={{ backgroundColor: colors.background }} />
           <Area
-            dataKey="value"
+            dataKey="applications"
             type="monotone"
             stroke={colors.salary.stroke}
             fill={colors.salary.fill}
