@@ -13,6 +13,16 @@ import Heading from "./Heading";
 import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
 import { useSearchParams } from "react-router-dom";
 
+const ChartContainer = styled.div`
+  grid-column: 1 / -1;
+  margin-top: 8rem;
+
+  & h2 {
+    margin-bottom: 2.4rem;
+    margin-left: 5rem;
+  }
+`;
+
 const ApplicationChart = ({ data }) => {
   const { isDarkMode } = useDarkMode();
   const [searchParams] = useSearchParams();
@@ -32,16 +42,6 @@ const ApplicationChart = ({ data }) => {
       ).length,
     };
   });
-
-  const ChartContainer = styled.div`
-    grid-column: 1 / -1;
-    margin-top: 8rem;
-
-    & h2 {
-      margin-bottom: 2.4rem;
-      margin-left: 5rem;
-    }
-  `;
 
   const colors = isDarkMode
     ? {
