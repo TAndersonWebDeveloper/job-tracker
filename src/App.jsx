@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 //React Router
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 //UI
 import AppLayout from "./ui/AppLayout";
@@ -33,6 +33,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route element={<AppLayout />}>
+              <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="jobs" element={<Jobs />}></Route>
               <Route path="new" element={<NewJob />} />
