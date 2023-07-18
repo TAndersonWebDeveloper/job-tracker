@@ -10,11 +10,22 @@ const StyledHeader = styled.header`
   gap: 2.4rem;
   align-items: center;
   justify-content: flex-end;
+  position: relative;
+
+  span {
+    font-size: 1.4rem;
+    color: var(--color-grey-400);
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 
 const Header = () => {
   return (
     <StyledHeader>
+      {/* <span>Certain CRUD operations disabled in demo mode</span> */}
       <DarkModeToggle />
     </StyledHeader>
   );
