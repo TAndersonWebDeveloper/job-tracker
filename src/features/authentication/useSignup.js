@@ -4,18 +4,17 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 export function useSignup() {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { mutate: signup, isLoading } = useMutation({
     mutationFn: signupApi,
 
     onSuccess: async (user) => {
       await queryClient.setQueryData(["user"], user.user);
+
+      toast.success("Account created successfully! Please log in.");
       navigate("/dashboard", { replace: true });
-      toast.success(
-        "Account created successfully! Please verify account in your email."
-      );
     },
 
     onError: (err) => {
