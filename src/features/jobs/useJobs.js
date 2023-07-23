@@ -1,9 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getJobs } from "../../services/apiJobs";
 import { useSearchParams } from "react-router-dom";
+import { getCurrentUser } from "../../services/apiAuth";
 export function useJobs() {
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
+
+  //Get by userId
+
+  const { data: user } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => getCurrentUser(),
+  });
 
   //Search
   const searchValue = searchParams.get("search");
@@ -35,7 +43,7 @@ export function useJobs() {
     error,
   } = useQuery({
     queryKey: ["jobs", page, filter, search],
-    queryFn: () => getJobs({ page, filter, search }),
+    queryFn: () => getJobs({ page, filter, search, user }),
   });
 
   const rejectedJobs = jobs?.filter((job) => job.status === "rejected");

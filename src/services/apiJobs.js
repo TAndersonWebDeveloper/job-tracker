@@ -1,9 +1,14 @@
 import supabase from "./supabase";
+import { getCurrentUser } from "./apiAuth";
 
-export const getJobs = async ({ page, filter, search }) => {
+export const getJobs = async ({ page, filter, search, user }) => {
   let query = supabase.from("jobs").select("*", {
     count: "exact",
   });
+
+  //Get by userId
+
+  query = query.eq("user", user.id);
 
   //Filter
 
@@ -42,6 +47,8 @@ export const addJob = async ({
   response,
   link,
 }) => {
+  const userId = await getCurrentUser();
+
   const { data, error } = await supabase.from("jobs").insert([
     {
       job_title: jobTitle,
@@ -51,6 +58,7 @@ export const addJob = async ({
       location,
       response,
       link,
+      user: userId.id,
     },
   ]);
 

@@ -3,7 +3,9 @@ import logo from "../../public/logo-light-mode.png";
 import logoDarkMode from "../../public/logo-dark-mode.png";
 import { useDarkMode } from "../context/DarkModeContext";
 
-const StyledLogo = styled.div``;
+const StyledLogo = styled.div`
+  margin: 0 auto;
+`;
 
 const Logo = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();

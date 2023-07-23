@@ -1,6 +1,7 @@
-import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { addJob as addJobApi } from "../services/apiJobs";
 import { toast } from "react-hot-toast";
+import { getCurrentUser } from "../services/apiAuth";
 
 export const useAddJob = () => {
   const queryClient = useQueryClient();

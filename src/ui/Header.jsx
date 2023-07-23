@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import DarkModeToggle from "./DarkModeToggle";
+import Logout from "../features/authentication/Logout";
 
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
@@ -27,6 +28,7 @@ const Header = () => {
     <StyledHeader>
       {/* <span>Certain CRUD operations disabled in demo mode</span> */}
       <DarkModeToggle />
+      <Logout />
     </StyledHeader>
   );
 };

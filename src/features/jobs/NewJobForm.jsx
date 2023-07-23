@@ -6,6 +6,7 @@ import FormRow from "../../ui/FormRow";
 import { addJob } from "../../services/apiJobs";
 import { useNavigate } from "react-router-dom";
 import Button from "../../ui/Button";
+import { useUser } from "../authentication/useUser";
 
 const Select = styled.select`
   font-size: 1.4rem;
@@ -22,6 +23,8 @@ const Select = styled.select`
 `;
 
 const NewJobForm = () => {
+  const { user } = useUser();
+  const userId = user?.id;
   const navigate = useNavigate();
 
   const { register, formState, handleSubmit } = useForm({
