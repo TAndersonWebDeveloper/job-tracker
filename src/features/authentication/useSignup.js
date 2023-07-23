@@ -10,9 +10,9 @@ export function useSignup() {
   const { mutate: signup, isLoading } = useMutation({
     mutationFn: signupApi,
 
-    onSuccess: (user) => {
-      queryClient.setQueryData(["user"], user.user);
-      navigate("/", { replace: true });
+    onSuccess: async (user) => {
+      await queryClient.setQueryData(["user"], user.user);
+      navigate("/dashboard", { replace: true });
       toast.success(
         "Account created successfully! Please verify account in your email."
       );
