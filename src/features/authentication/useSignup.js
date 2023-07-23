@@ -9,6 +9,7 @@ export function useSignup() {
 
   const { mutate: signup, isLoading } = useMutation({
     mutationFn: signupApi,
+
     onSuccess: (user) => {
       queryClient.setQueryData(["user"], user.user);
       navigate("/", { replace: true });
@@ -18,7 +19,7 @@ export function useSignup() {
     },
 
     onError: (err) => {
-      toast.error("The provided email or password is incorrect.", err);
+      toast.error(err.message);
     },
   });
 

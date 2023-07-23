@@ -11,7 +11,7 @@ export async function signup({ fullName, email, password }) {
   });
 
   if (error) {
-    return { error };
+    throw new Error(error.message);
   }
 
   return { data };
